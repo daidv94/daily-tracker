@@ -1,0 +1,26 @@
+name: Daily Gold Price
+
+on:
+  schedule:
+    # 9:00 AM Vietnam time (ICT = UTC+7) = 2:00 AM UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch: # allows manual trigger for testing
+
+jobs:
+  send-gold-price:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r gold-tracker/requirements.txt
+
+      - name: Send gold prices
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python gold-tracker/main.py
