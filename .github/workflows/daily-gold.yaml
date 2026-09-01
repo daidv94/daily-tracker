@@ -2,8 +2,8 @@ name: Daily Gold Price
 
 on:
   schedule:
-    # 9:00 AM Vietnam time (ICT = UTC+7) = 2:00 AM UTC
-    - cron: "0 2 * * *"
+    # 9:19 AM Vietnam time (ICT = UTC+7) = 2:00 AM UTC
+    - cron: "40 8 * * *"
   workflow_dispatch: # allows manual trigger for testing
 
 jobs:
